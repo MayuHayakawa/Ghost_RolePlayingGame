@@ -13,6 +13,7 @@ public class Battle {
     int ghostpw = 0;
     int ghosthp = 0;
 
+    //set the value of the ghost constructor that player chose as an argument
     public void battleWith(String ghostname, int ghostlevel, int ghostpower, int ghosthitpoints) {
 
         ghostnm = ghostname;
@@ -115,26 +116,32 @@ public class Battle {
     // ========================== each ghost's execute battle methods ============================
     
     public void battleWithPumpkin() {
+        //make ghost constract
         GhostStatus ghost = new GhostStatus("Pumpkin", 1, 2, 10);
         System.out.println("------------------------------");
         ghost.showStatus();
         System.out.println();
+        //set the value of the ghost constructor as an argument to the battle method
         battleWith(ghost.name, ghost.level, ghost.power, ghost.hitpoints);
     };
     
     public void battleWithMummy() {
+        //make ghost constract
         GhostStatus ghost = new GhostStatus("Mummy", 2, 4, 15);
         System.out.println("------------------------------");
         ghost.showStatus();
         System.out.println();
+        //set the value of the ghost constructor as an argument to the battle method
         battleWith(ghost.name, ghost.level, ghost.power, ghost.hitpoints); 
     };
     
     public void battleWithDracula() {
+        //make ghost constract
         GhostStatus ghost = new GhostStatus("Dracula", 3, 6,30);
         System.out.println("------------------------------");
         ghost.showStatus();
         System.out.println();
+        //set the value of the ghost constructor as an argument to the battle method
         battleWith(ghost.name, ghost.level, ghost.power, ghost.hitpoints); 
     };
     
