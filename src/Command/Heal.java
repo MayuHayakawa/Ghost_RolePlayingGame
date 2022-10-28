@@ -8,9 +8,7 @@ public class Heal {
         PlayerStatus.hitpoints = PlayerStatus.maxhitpoints;
         System.out.println("------------------------------");
         System.out.println(PlayerStatus.name + " regained health!");
-        System.out.println();
         PlayerStatus.showStatus();
-        System.out.println("------------------------------");
         MainMenu.showMenu();
     }
 }

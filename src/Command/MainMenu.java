@@ -41,12 +41,16 @@ public class MainMenu {
                     break;
                 default:
                     System.out.println();
-                    System.out.println(">>Invalid option. Please enter again.");
+                    System.out.println("------------------------------");
+                    System.out.println("Invalid option. Please enter again.");
+                    System.out.println("------------------------------");
                     break;
             }
         }while(option != '4');
         System.out.println();
+        System.out.println("------------------------------");
         System.out.println("We're waiting for your challenge again! :)");
+        System.out.println("------------------------------");
 
     };
 }

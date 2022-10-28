@@ -1,10 +1,8 @@
 package Command;
 import java.util.Scanner;
-
 import Status.GhostStatus;
 import Status.PlayerStatus;
 
-// import trash.Status;
 public class Battle {
 
     Scanner input = new Scanner(System.in);
@@ -21,9 +19,9 @@ public class Battle {
         ghostpw = ghostpower;
         ghosthp = ghosthitpoints;
 
-        System.out.println(ghostname + " appeared! \nWhat will you do?");
+        System.out.println(ghostnm + " appeared! \nWhat will you do?");
         System.out.println("------------------------------");
-        
+
         do {
             do {
                 do {
@@ -40,24 +38,24 @@ public class Battle {
                     switch(option) {
                         case '1':
                             System.out.println();
-                            //プレイヤーのレベルが敵より高ければプレイヤーが先に攻撃できる
+                            //if player's level is highter than ghost, player deal damage first.
                             if(PlayerStatus.level > ghostlevel) {
                                 dealDamage();
                                 calculateDealDamage(ghosthp, PlayerStatus.power);
-                                //敵の体力が残っている場合は敵が攻撃する
+                                //if ghost's hp remains, the ghost attack to player.
                                 if(ghosthp > 0) {
                                     showGhostHP();
                                     getDamage();
-                                    calculateGetDamage(PlayerStatus.hitpoints, ghostpower);
+                                    calculateGetDamage(PlayerStatus.hitpoints, ghostpw);
                                     if (PlayerStatus.hitpoints > 0) {
                                         showPlayerHP();
                                     }
                                 }
-                                //プレイヤーのレベルが敵以下だった場合は敵が先に攻撃する
+                            //if ghost's level is highter than or same with player, the ghost attack to player first.
                             } else {
                                 getDamage();
-                                calculateGetDamage(PlayerStatus.hitpoints, ghostpower);
-                                //プレイヤーの体力が残っている場合はプレイヤーが攻撃する
+                                calculateGetDamage(PlayerStatus.hitpoints, ghostpw);
+                                //if player's hp remains, player deal damage.
                                 if(PlayerStatus.hitpoints > 0) {
                                     showPlayerHP();
                                     dealDamage();
@@ -67,7 +65,6 @@ public class Battle {
                                     }
                                 }
                             }
-
                             if (PlayerStatus.hitpoints <= 0) {
                                 System.out.println("------------------------------");
                                 System.out.println(name + " got scared and ran away...");
@@ -75,11 +72,12 @@ public class Battle {
                                 input.close();
                                 System.exit(0);
                             }
-
                             if (ghosthp <= 0 ) {
                                 updateBattleRecords();
                                 if(PlayerStatus.pumpkin.equals("Done") && PlayerStatus.mummy.equals("Done") && PlayerStatus.dracula.equals("Done")) {     
+                                    System.out.println("------------------------------");                           
                                     System.out.println(ghostnm + " has disappeared!\nAnd " + name + " has defeated ALL ghosts!!!");
+                                    System.out.println("------------------------------");                           
                                     Logo.clear();
                                     input.close();
                                     System.exit(0);
@@ -90,31 +88,32 @@ public class Battle {
                                 input.close();
                             }
                             break;
-
                         case '2':
-                                System.out.println();
-                                PlayerStatus.showStatus();
-                                break;
-
+                            System.out.println();
+                            PlayerStatus.showStatus();
+                            break;
                         case '3':
-                                System.out.println();
-                                System.out.println("Got away safety!");
-                                Search.choosePlace();
-                                input.close();
-                                break;
-
+                            System.out.println();
+                            System.out.println("------------------------------");
+                            System.out.println("Got away safety!");
+                            System.out.println("------------------------------");
+                            Search.choosePlace();
+                            input.close();
+                            break;
                         default:
-                                System.out.println();
-                                System.out.println(">>Invalid option. Please enter again.");
-                                break;
-
+                            System.out.println();
+                            System.out.println("------------------------------");
+                            System.out.println("Invalid option. Please enter again.");
+                            System.out.println("------------------------------");
+                            break;
                     }
                 }while (PlayerStatus.hitpoints >= 0);
             } while (ghosthp >= 0);
         }while(option != 3);
-    }   
+    }
 
-
+    // ========================== each ghost's execute battle methods ============================
+    
     public void battleWithPumpkin() {
         GhostStatus ghost = new GhostStatus("Pumpkin", 1, 2, 10);
         System.out.println("------------------------------");
@@ -138,44 +137,46 @@ public class Battle {
         System.out.println();
         battleWith(ghost.name, ghost.level, ghost.power, ghost.hitpoints); 
     };
-
-
+    
+    // ========================== battle methods ============================
+    
     public void getDamage() {
         System.out.println("------------------------------");
-        System.out.println(ghostnm + " attacked " + name + "!\n" + name + "took " + ghostpw + " damage.");
+        System.out.println(ghostnm + " attacked " + name + "!\n" + name + " took " + ghostpw + " damage.");
     }
-
+    
     public int calculateGetDamage(int hp, int power) {
         return PlayerStatus.hitpoints = hp - power;
     }
-
+    
     public void dealDamage() {
         System.out.println("------------------------------");
-        System.out.println(ghostnm + " attacked " + name + "!\n" + name + "took " + ghostpw + " damage.");
+        System.out.println(ghostnm + " attacked " + name + "!\n" + name + " took " + ghostpw + " damage.");
     }
     public int calculateDealDamage(int hp, int power) {
         return ghosthp = hp - power;
     }
-
+    
     public void showPlayerHP() {
         System.out.println(name + "'s HP is " + PlayerStatus.hitpoints +  ".");
         System.out.println("------------------------------");
     }
-
+    
     public void showGhostHP() {
         System.out.println("The ghost has " + ghosthp + " HP remaining.");
         System.out.println("------------------------------");
     }
-
-
+    
+    // ========================== change player's status methods ============================
 
     public void levelUp() {
         PlayerStatus.level++;
         PlayerStatus.power = PlayerStatus.power + 3;
         PlayerStatus.maxhitpoints = PlayerStatus.maxhitpoints + 5;
         System.out.println("------------------------------");
+        System.out.println("------------------------------");
         System.out.println(ghostnm + " has disappeared!\n" + name + " grew to level " + PlayerStatus.level +"!");
-        System.out.println();
+        System.out.println("------------------------------");
         PlayerStatus.showStatus();
         System.out.println("------------------------------");
 

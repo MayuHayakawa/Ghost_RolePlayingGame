@@ -40,7 +40,9 @@ public class Search {
                     break;
                 default:
                     System.out.println();
-                    System.out.println(">>Invalid option. Please enter again.");
+                    System.out.println("------------------------------");
+                    System.out.println("Invalid option. Please enter again.");
+                    System.out.println("------------------------------");
                     break;
             }
         }while(option != '4');
